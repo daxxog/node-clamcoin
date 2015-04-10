@@ -4,10 +4,11 @@ B1_FLAGS=
 B2_FLAGS=
 B1=-datadir=$(BOX)/1 $(B1_FLAGS)
 B2=-datadir=$(BOX)/2 $(B2_FLAGS)
-CLAMD=clam-1.4.10/bin/clamd
+CLAM_VERSION=1.4.10
+CLAMD=clam-$(CLAM_VERSION)/bin/clamd
 
 download-clam:
-	curl http://khashier.com/static/releases/clam-1.4.10-linux64.tar.gz | tar xz
+	curl http://khashier.com/static/releases/clam-$(CLAM_VERSION)-linux64.tar.gz | tar xz
 
 test:
 	$(MAKE) download-clam
