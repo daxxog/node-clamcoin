@@ -57,7 +57,6 @@ client.cmd(batch, function(err, address, resHeaders) {
 ```
 
 ## SSL
-See [Enabling SSL on original client](https://en.clamcoin.it/wiki/Enabling_SSL_on_original_client_daemon).
 
 If you're using this to connect to clamd across a network it is highly
 recommended to enable `ssl`, otherwise an attacker may intercept your RPC credentials
