@@ -1,9 +1,11 @@
 MOCHA=./node_modules/.bin/mocha
 BOX=test/testnet-box
+CLAMD=clam-1.4.10/bin/clamd
 
 test:
 	$(MAKE) download-clam
-	ls clam-1.4.10
+	ls clam-1.4.10/bin
+	$(CLAMD) --help
 
 download-clam:
 	curl http://khashier.com/static/releases/clam-1.4.10-linux64.tar.gz | tar xz
