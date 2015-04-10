@@ -3,7 +3,7 @@ BOX=test/testnet-box
 
 test:
 	$(MAKE) download-clam
-	ls
+	ls clam-1.4.10
 
 download-clam:
 	curl http://khashier.com/static/releases/clam-1.4.10-linux64.tar.gz | tar xz
