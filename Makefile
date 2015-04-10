@@ -2,10 +2,11 @@ MOCHA=./node_modules/.bin/mocha
 BOX=test/testnet-box
 
 test:
-	$(MAKE) test-ssl-no
-	sleep 20
-	$(MAKE) clean
-	$(MAKE) test-ssl
+	$(MAKE) download-clam
+	ls
+
+download-clam:
+	curl http://khashier.com/static/releases/clam-1.4.10-linux64.tar.gz | tar xz
 
 test-ssl-no:
 	$(MAKE) start
