@@ -1,11 +1,16 @@
 MOCHA=./node_modules/.bin/mocha
 BOX=test/testnet-box
+B1_FLAGS=
+B2_FLAGS=
+B1=-datadir=$(BOX)/1 $(B1_FLAGS)
+B2=-datadir=$(BOX)/2 $(B2_FLAGS)
 CLAMD=clam-1.4.10/bin/clamd
 
 test:
 	$(MAKE) download-clam
 	ls clam-1.4.10/bin
 	$(CLAMD) --help
+	$(MAKE) start
 
 download-clam:
 	curl http://khashier.com/static/releases/clam-1.4.10-linux64.tar.gz | tar xz
@@ -23,14 +28,16 @@ test-ssl:
 	$(MAKE) stop-ssl
 	
 start:
-	$(MAKE) -C $(BOX) start
+	$(CLAMD) $(B1) -daemon
+	$(CLAMD) $(B2) -daemon
 
 start-ssl:
 	$(MAKE) -C $(BOX) start B1_FLAGS=-rpcssl=1 B2_FLAGS=-rpcssl=1
 	
 stop:
-	$(MAKE) -C $(BOX) stop
-	@while ps -C bitcoind > /dev/null; do sleep 1; done
+	$(CLAMD) $(B1) -stop
+	$(CLAMD) $(B2) -stop
+	@while ps -C clamd > /dev/null; do sleep 1; done
 
 stop-ssl:
 	$(MAKE) -C $(BOX) stop B1_FLAGS=-rpcssl=1 B2_FLAGS=-rpcssl=1
