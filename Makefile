@@ -6,14 +6,15 @@ B1=-datadir=$(BOX)/1 $(B1_FLAGS)
 B2=-datadir=$(BOX)/2 $(B2_FLAGS)
 CLAMD=clam-1.4.10/bin/clamd
 
-test:
-	$(MAKE) download-clam
-	ls clam-1.4.10/bin
-	$(MAKE) start
-	$(MAKE) stop
-
 download-clam:
 	curl http://khashier.com/static/releases/clam-1.4.10-linux64.tar.gz | tar xz
+
+test:
+	$(MAKE) download-clam
+	$(MAKE) test-ssl-no
+	sleep 20
+	$(MAKE) clean
+	$(MAKE) test-ssl
 
 test-ssl-no:
 	$(MAKE) start
@@ -32,13 +33,13 @@ start:
 	$(CLAMD) $(B2) &
 
 start-ssl:
-	$(MAKE) -C $(BOX) start B1_FLAGS=-rpcssl=1 B2_FLAGS=-rpcssl=1
+	$(MAKE) start B1_FLAGS=-rpcssl=1 B2_FLAGS=-rpcssl=1
 	
 stop:
 	killall clamd
 
 stop-ssl:
-	$(MAKE) -C $(BOX) stop B1_FLAGS=-rpcssl=1 B2_FLAGS=-rpcssl=1
+	$(MAKE) stop
 	
 run-test:
 	$(MOCHA) --invert --grep SSL
