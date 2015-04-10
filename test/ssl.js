@@ -1,11 +1,11 @@
 var assert = require('assert'),
     fs = require('fs'),
     clone = require('clone'),
-    bitcoin = require('../'),
+    clamcoin = require('../'),
     config = require('./config');
 
 var getInfo = function(opts, cb) {
-  var client = new bitcoin.Client(opts);
+  var client = new clamcoin.Client(opts);
   client.getInfo(cb);
 };
 

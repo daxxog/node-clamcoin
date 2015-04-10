@@ -1,7 +1,7 @@
 var assert = require('assert'),
     clone = require('clone'),
     http = require('http'),
-    bitcoin = require('../'),
+    clamcoin = require('../'),
     config = require('./config');
 
 var test = {
@@ -9,7 +9,7 @@ var test = {
 };
 
 var makeClient = function makeClient() {
-  return new bitcoin.Client(config);
+  return new clamcoin.Client(config);
 };
 
 var notEmpty = function notEmpty(data) {
@@ -133,7 +133,7 @@ describe('Client', function() {
     });
   });
 
-  it('bitcoin related error should be an Error object', function(done) {
+  it('clamcoin related error should be an Error object', function(done) {
     var client = makeClient();
     client.cmd('nomethod', function(err, expectedValue) {
       assert.ok(err instanceof Error);
@@ -167,10 +167,10 @@ describe('Client', function() {
     var badCredentials = clone(config);
     badCredentials.user = 'baduser';
     badCredentials.pass = 'badpwd';
-    var client = new bitcoin.Client(badCredentials);
+    var client = new clamcoin.Client(badCredentials);
 
     it('should still return client object', function(done) {
-      assert.ok(client instanceof bitcoin.Client);
+      assert.ok(client instanceof clamcoin.Client);
       done();
     });
 
@@ -190,10 +190,10 @@ describe('Client', function() {
     badPort.port = 9897;
     badPort.user = 'baduser';
     badPort.pass = 'badpwd';
-    var client = new bitcoin.Client(badPort);
+    var client = new clamcoin.Client(badPort);
 
     it('will return client object', function(done) {
-      assert.ok(client instanceof bitcoin.Client);
+      assert.ok(client instanceof clamcoin.Client);
       done();
     });
 
@@ -215,7 +215,7 @@ describe('Client', function() {
         request = req;
         response = res;
       });
-      var client = new bitcoin.Client({
+      var client = new clamcoin.Client({
         host: 'localhost',
         port: 19998,
         user: 'admin1',
@@ -242,7 +242,7 @@ describe('Client', function() {
         request = req;
         response = res;
       });
-      var client = new bitcoin.Client({
+      var client = new clamcoin.Client({
         host: 'localhost',
         port: 19999,
         user: 'admin1',
@@ -267,7 +267,7 @@ describe('Client', function() {
     var assertResHeaders = function(resHeaders) {
       assert.ok(resHeaders);
       assert.ok(resHeaders.server);
-      assert.ok(/bitcoin/.test(resHeaders.server));
+      assert.ok(/clamcoin/.test(resHeaders.server));
     };
     it('should be returned for no parameter calls', function(done) {
       var client = makeClient();

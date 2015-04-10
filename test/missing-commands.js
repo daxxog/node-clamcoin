@@ -1,5 +1,5 @@
 var assert = require('assert'),
-    bitcoin = require('../'),
+    clamcoin = require('../'),
     config = require('./config'),
     commands = require('../lib/commands');
 
@@ -26,7 +26,7 @@ var getHelpCommands = function(client, cb) {
 describe('Client Commands', function() {
 
   it('should have all the commands listed by `help`', function(done) {
-    var client = new bitcoin.Client(config);
+    var client = new clamcoin.Client(config);
     getHelpCommands(client, function(err, helpCommands) {
       assert.ifError(err);
 
@@ -46,7 +46,7 @@ describe('Client Commands', function() {
   });
 
   it('should not have any commands not listed by `help`', function(done) {
-    var client = new bitcoin.Client(config);
+    var client = new clamcoin.Client(config);
     getHelpCommands(client, function(err, helpCommands) {
       assert.ifError(err);
 

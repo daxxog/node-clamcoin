@@ -1,16 +1,22 @@
 {
-  "name": "bitcoin",
-  "description": "Communicate with bitcoind via JSON-RPC",
+  "name": "clamcoin",
+  "description": "Communicate with clamd via JSON-RPC",
   "version": "2.3.0",
   "main": "lib/index.js",
   "keywords": [
-    "bitcoin",
+    "clamcoin",
     "rpc"
   ],
   "author": "Bill Casarin <bill@casarin.ca> (jb55.com)",
   "contributors": [
-    "Sean Lavine <sean@eternalrise.com>"
+    "Sean Lavine <sean@eternalrise.com>",
+    "David Volm <david@volminator.com>"
   ],
+  "maintainers": [{
+      "name"  : "David Volm",
+      "email" : "david@volminator.com",
+      "web"   : "http://daxxog.com/"
+  }],
   "dependencies": {},
   "devDependencies": {
     "clone": "^0.1.18",
@@ -19,7 +25,7 @@
   "optionalDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git://github.com/freewil/node-bitcoin.git"
+    "url": "git://github.com/daxxog/node-clamcoin.git"
   },
   "engines": {
     "node": ">= 0.10.0"
