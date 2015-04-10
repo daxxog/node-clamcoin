@@ -9,7 +9,6 @@ CLAMD=clam-1.4.10/bin/clamd
 test:
 	$(MAKE) download-clam
 	ls clam-1.4.10/bin
-	$(CLAMD) help
 	$(MAKE) start
 	$(MAKE) stop
 
