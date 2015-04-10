@@ -64,6 +64,7 @@ run-test-ssl:
 	$(MOCHA) --grep SSL
 	
 clean:
+	rm -f $(BOX)/*/clamd.pid
 	rm -f $(BOX)/*/peers.dat
 	rm -f $(BOX)/*/regtest/clamspeech.txt
 	rm -f $(BOX)/*/regtest/*.dat
