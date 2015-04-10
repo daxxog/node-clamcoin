@@ -13,9 +13,9 @@ download-clam:
 test:
 	$(MAKE) download-clam
 	$(MAKE) test-ssl-no
-	sleep 20
-	$(MAKE) clean
-	$(MAKE) test-ssl
+	#sleep 20
+	#$(MAKE) clean
+	#$(MAKE) test-ssl
 
 test-ssl-no:
 	$(MAKE) start
