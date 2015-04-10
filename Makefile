@@ -28,16 +28,14 @@ test-ssl:
 	$(MAKE) stop-ssl
 	
 start:
-	$(CLAMD) $(B1) -daemon
-	$(CLAMD) $(B2) -daemon
+	$(CLAMD) $(B1) &
+	$(CLAMD) $(B2) &
 
 start-ssl:
 	$(MAKE) -C $(BOX) start B1_FLAGS=-rpcssl=1 B2_FLAGS=-rpcssl=1
 	
 stop:
-	$(CLAMD) $(B1) -stop
-	$(CLAMD) $(B2) -stop
-	@while ps -C clamd > /dev/null; do sleep 1; done
+	killall clamd
 
 stop-ssl:
 	$(MAKE) -C $(BOX) stop B1_FLAGS=-rpcssl=1 B2_FLAGS=-rpcssl=1
