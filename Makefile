@@ -11,7 +11,7 @@ test:
 	$(MAKE) download-clam
 	$(MAKE) rename-conf
 	$(MAKE) test-ssl-no
-	sleep 20
+	sleep 30
 	$(MAKE) clean
 	$(MAKE) test-ssl
 
@@ -43,7 +43,6 @@ start-ssl:
 	
 stop:
 	killall clamd
-	sleep 20
 
 stop-ssl:
 	$(MAKE) stop
