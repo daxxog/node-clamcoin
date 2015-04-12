@@ -6,7 +6,6 @@ B1=-datadir=$(BOX)/1 $(B1_FLAGS)
 B2=-datadir=$(BOX)/2 $(B2_FLAGS)
 CLAM_VERSION=1.4.10
 CLAMD=clam-$(CLAM_VERSION)/bin/clamd
-CLAMD=/Users/daxxog/dev/git/clams/src/clamd
 
 test:
 	$(MAKE) download-clam
