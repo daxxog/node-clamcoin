@@ -9,20 +9,12 @@ CLAMD=clam-$(CLAM_VERSION)/bin/clamd
 CLAMD=/Users/daxxog/dev/git/clams/src/clamd
 
 test:
-	#$(MAKE) download-clam
+	$(MAKE) download-clam
 	$(MAKE) rename-conf
-	#$(MAKE) test-ssl-no
-	$(MAKE) sandbox
-	#sleep 20
-	#$(MAKE) clean
-	#$(MAKE) test-ssl
-
-sandbox:
-	#$(MAKE) start
-	#sleep 20
-	node sandbox
-	$(MAKE) run-test
-	#$(MAKE) stop
+	$(MAKE) test-ssl-no
+	sleep 20
+	$(MAKE) clean
+	$(MAKE) test-ssl
 
 rename-conf:
 	mv $(BOX)/1/*.conf $(BOX)/1/clam.conf
