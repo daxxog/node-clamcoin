@@ -26,11 +26,14 @@ var makeServer = function(port) {
 describe('Client', function() {
 
   describe('getAccountAddress()', function() {
+    this.timeout(5000);
+
     it('should be able to get an account address', function(done) {
       var client = makeClient();
       client.getAccountAddress(test.account, function(err, address) {
         assert.ifError(err);
         assert.ok(address);
+
         client.getAccount(address, function(err, account) {
           assert.ifError(err);
           assert.equal(account, test.account);
@@ -41,6 +44,8 @@ describe('Client', function() {
   });
 
   describe('listTransactions()', function() {
+    this.timeout(5000);
+    
     it('should be able to listTransactions with specific count', function(done) {
       var client = makeClient();
       client.listTransactions(test.account, 15, function(err, txs) {
@@ -63,6 +68,8 @@ describe('Client', function() {
   });
 
   describe('getNewAddress()', function() {
+    this.timeout(5000);
+    
     it('should be able to get new address', function(done) {
       var client = makeClient();
       client.getNewAddress(test.account, function(err, address) {
@@ -92,7 +99,9 @@ describe('Client', function() {
       var client = makeClient();
       client.getDifficulty(function(err, difficulty) {
         assert.ifError(err);
-        assert.ok(typeof difficulty === 'number');
+        assert.ok(typeof difficulty === 'object');
+        assert.ok(typeof difficulty['proof-of-work'] === 'number');
+        assert.ok(typeof difficulty['proof-of-stake'] === 'number');
         done();
       });
     });
@@ -105,18 +114,6 @@ describe('Client', function() {
         assert.ifError(err);
         notEmpty(info);
         assert.ok(info.errors === '');
-        done();
-      });
-    });
-  });
-
-  describe('getHashesPerSec()', function() {
-    it('should get hashes per second', function(done) {
-      var client = makeClient();
-      client.getHashesPerSec(function(err, data) {
-        assert.ifError(err);
-        notEmpty(data);
-        assert.ok(typeof data === 'number');
         done();
       });
     });
@@ -145,7 +142,7 @@ describe('Client', function() {
   });
 
   it('running batch of rpc calls', function(done) {
-    this.timeout(5000);
+    this.timeout(25000);
     var batch = [];
     for (var i = 0; i < 10; ++i) {
       batch.push({
@@ -153,13 +150,15 @@ describe('Client', function() {
         params: [test.account]
       });
     }
-    var client = makeClient();
-    var batchCallbackCount = 0;
+    var client = makeClient(),
+        batchCallbackCount = 0;
     client.cmd(batch, function(err, address) {
       assert.ifError(err);
       assert.ok(++batchCallbackCount <= 10);
       assert.ok(address);
-      if (batchCallbackCount === 10) done();
+      if (batchCallbackCount === 10) {
+        done();
+      }
     });
   });
 
@@ -267,7 +266,7 @@ describe('Client', function() {
     var assertResHeaders = function(resHeaders) {
       assert.ok(resHeaders);
       assert.ok(resHeaders.server);
-      assert.ok(/clamcoin/.test(resHeaders.server));
+      assert.ok(/Clam/.test(resHeaders.server));
     };
     it('should be returned for no parameter calls', function(done) {
       var client = makeClient();
